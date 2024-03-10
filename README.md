@@ -1,4 +1,4 @@
-# db go package
+# go mongodb link package
 
 this package abstracts the connection between go code and the mongo db to easily [read and write data](#functionality) from whereever needed.
 
@@ -10,7 +10,7 @@ Click [here](#how-to-use-with-your-custom-structs) for further details
 ## how to set up
 First copy the package within your project root folder.
 
-Then import the package by using ```import <yourRootFolder/>db```.
+Then import the package by using ```import mongodblink```.
 
 The public functions will create a connection the first time one of them is used. 
 The established connection is then reused.
@@ -36,30 +36,7 @@ You can create a new link by using this code snippet:
 link := db.New(<your uri>, func(){
 	//insert your custom functionality to be called after a reconnect
 })
-hqLink.Connect()
-```
-
-There is also a naming struct to help with database namings. The struct looks like this:
-```
-type DatabaseNamings struct {
-	HqDb			string `yaml:"hqDb"`
-	PlantUsaDb   	string `yaml:"plantUsaDb"`
-	PlantChinaDb 	string `yaml:"plantChinaDb"`
-	SupportDb 		string `yaml:"supportDb"`
-	Orders    		string `yaml:"orders"`
-	OrdersBroken	string `yaml:"ordersBroken"`
-	Kpi       		string `yaml:"kpi"`
-	Load      		string `yaml:"load"`
-	Products  		string `yaml:"products"`
-	Parts     		string `yaml:"parts"`
-	Suppliers 		string `yaml:"suppliers"`
-	Tickets			string `yaml:"Tickets"`
-	State			string `yaml:"State"`
-}
-```
-to use the functionality, it has to be added onto the db package with this line of code:
-```
-db.UpdateNamings(configs.DatabaseNamings)
+link.Connect()
 ```
 
 ## functionality
@@ -95,13 +72,3 @@ The user has to ensure the structs have an id or should not use the xxxById func
 ## how to use with your custom structs
 As mentioned in the introduction this package limits the interaction with the database to a specified set of structs.
 To update or alter the list of structs the source code needs to be altered in two places.
-
-### 1. update the dbDocument interface
-This interface holds all the allowed struct names. All functions refer to this interface when accepting structs.
-If you want to add "yourStruct" to the interfaces just add it like this:
-```
-type dbDocument interface {
-	existingStruct | 
-	yourStruct
-}
-```

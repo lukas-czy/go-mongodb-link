@@ -1,4 +1,4 @@
-package db
+package mongodblink
 
 import (
 	"context"
