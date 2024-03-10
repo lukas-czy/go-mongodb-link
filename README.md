@@ -1,16 +1,20 @@
 # go mongodb link package
 
+*Developed by Lukas Czycholl, License: MIT, feel free to use, fork, adapt. Help me making this better by opening issues.*
+
 this package abstracts the connection between go code and the mongo db to easily [read and write data](#functionality) from whereever needed.
 
-The package takes care of the connection by using [environment variables](#environment-variables).
-
-The package is setup to be limited to work with go compilted protofile structs. 
-Click [here](#how-to-use-with-your-custom-structs) for further details 
-
 ## how to set up
-First copy the package within your project root folder.
-
-Then import the package by using ```import mongodblink```.
+Add the requirement into your go.mod file
+```
+require https://github.com/lukas-czy/go-mongodb-link v0.0.1 //replace with newest version
+```
+Then import the package by using this:
+```
+import (
+	"https://github.com/lukas-czy/go-mongodb-link"
+)
+```
 
 The public functions will create a connection the first time one of them is used. 
 The established connection is then reused.
